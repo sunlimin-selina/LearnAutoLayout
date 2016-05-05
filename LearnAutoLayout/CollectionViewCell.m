@@ -9,6 +9,9 @@
 #import "CollectionViewCell.h"
 #import <Masonry/Masonry.h>
 
+static const int margin = 8;
+
+
 @interface CollectionViewCell()
 {
     UIView *superview;
@@ -26,9 +29,6 @@
 }
 
 @end
-
-static const int margin = 8;
-
 
 @implementation CollectionViewCell
 

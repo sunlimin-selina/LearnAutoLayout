@@ -45,7 +45,7 @@
 -(void)setupCollectionCellElement{
     //头像view
     iconView = UIImageView.new;
-    iconView.image = [UIImage imageNamed:@"icon.jpg"];
+    iconView.image = [UIImage imageNamed:@"myicon.jpg"];
     iconView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:iconView];
     
@@ -188,6 +188,8 @@
                                                             multiplier:0.2
                                                               constant:0],
                                 ]];
+    
+
     
 }
 
@@ -497,13 +499,17 @@
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:priceLabel
                                                              attribute:NSLayoutAttributeHeight
-                                                            multiplier:1
+                                                            multiplier:1.0
                                                               constant:0],
                                 ]];
     
 }
 
 - (void)applyConstraintsToPrimeCostLabel{
+    
+    CGSize priceLabelSize = [priceLabel.text sizeWithAttributes:
+                   @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
+    //根据计算结果重新设置UILabel的尺寸
     
     [superview addConstraints:@[
                                 
@@ -518,10 +524,10 @@
                                 [NSLayoutConstraint constraintWithItem:primeCostLabel
                                                              attribute:NSLayoutAttributeLeft
                                                              relatedBy:NSLayoutRelationEqual
-                                                                toItem:superview
+                                                                toItem:priceLabel
                                                              attribute:NSLayoutAttributeLeft
                                                             multiplier:1.0
-                                                              constant:50],
+                                                              constant:priceLabelSize.width+5],
                                 
                                 [NSLayoutConstraint constraintWithItem:primeCostLabel
                                                              attribute:NSLayoutAttributeBottom
@@ -561,6 +567,8 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+    iconView.layer.cornerRadius = iconView.frame.size.width/2;
+
  }
 
 

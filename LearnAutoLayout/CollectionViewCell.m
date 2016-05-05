@@ -8,10 +8,10 @@
 
 #import "CollectionViewCell.h"
 
+
 @interface CollectionViewCell()
 {
     UIView *superview;
-    int margin;
     UIImageView *iconView;//头像view
     UILabel *usrInfoLabel;//用户信息label
     UILabel *locationLabel;//位置信息label
@@ -26,6 +26,9 @@
 }
 
 @end
+
+static const int margin = 8;
+
 
 @implementation CollectionViewCell
 
@@ -116,7 +119,6 @@
     [self addSubview:timeLabel];
 
     superview = self;
-    margin = 8;
     
     [self applyConstraintsToIconView];    //头像iconView约束
     
@@ -568,15 +570,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     iconView.layer.cornerRadius = iconView.frame.size.width/2;
-
+    [[iconView layer] setMasksToBounds:YES];
  }
 
-
--(void)clickCollectionCell:(UIButton *)sender{
-    
-
-    
-}
 
 
 @end

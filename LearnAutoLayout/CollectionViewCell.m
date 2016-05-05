@@ -7,7 +7,7 @@
 //
 
 #import "CollectionViewCell.h"
-
+#import <Masonry/Masonry.h>
 
 @interface CollectionViewCell()
 {
@@ -139,7 +139,7 @@ static const int margin = 8;
 }
 
 - (void)applyConstraintsToIconView{
-    //头像iconView约束
+    //NSLayoutConstraint添加约束
     [superview addConstraints:@[
                                 
                                 [NSLayoutConstraint constraintWithItem:iconView
@@ -191,8 +191,18 @@ static const int margin = 8;
                                                               constant:0],
                                 ]];
     
-
-    
+//    //使用Masonry
+//    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(superview.mas_top).offset(margin);
+//        make.left.equalTo(superview.mas_left).offset(margin);
+//        make.bottom.equalTo(picView.mas_top).offset(-margin);
+//        make.right.equalTo(usrInfoLabel.mas_left).offset(-margin);
+//        
+//        make.width.equalTo(superview.mas_width).multipliedBy(0.25);
+//        make.height.equalTo(superview.mas_height).multipliedBy(0.2);
+//
+//    }];
+//    
 }
 
 - (void)applyConstraintsToUsrInfoLabel{
@@ -242,6 +252,19 @@ static const int margin = 8;
                                 ]];
     
 //    [usrInfoLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
+    //使用Masonry
+//    [usrInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(superview.mas_top).offset(margin);
+//        make.left.equalTo(iconView.mas_right).offset(margin);
+//        make.bottom.equalTo(locationLabel.mas_top);
+//        make.right.equalTo(superview.mas_right).offset(-margin);
+//        
+//        make.height.equalTo(iconView.mas_height).multipliedBy(0.5);
+//        
+//    }];
+    
+
 }
 
 - (void)applyConstraintsToLocationLabel{
@@ -276,17 +299,9 @@ static const int margin = 8;
                                                              attribute:NSLayoutAttributeRight
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:superview
-                                                             attribute:NSLayoutAttributeLeft
+                                                             attribute:NSLayoutAttributeRight
                                                             multiplier:1.0
                                                               constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:locationLabel
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:iconView
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:2.0
-                                                              constant:0],
                                 
                                 [NSLayoutConstraint constraintWithItem:locationLabel
                                                              attribute:NSLayoutAttributeHeight
@@ -296,6 +311,17 @@ static const int margin = 8;
                                                             multiplier:1.0
                                                               constant:0],
                                 ]];
+    
+//    //使用Masonry
+//    [locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(usrInfoLabel.mas_bottom);
+//        make.left.equalTo(usrInfoLabel.mas_left);
+//        make.bottom.equalTo(picView.mas_top).offset(-margin);
+//        make.right.equalTo(superview.mas_right).offset(-margin);
+//        
+//        make.height.equalTo(usrInfoLabel.mas_height);
+//        
+//    }];
 }
 
 - (void)applyConstraintsToPicView{
@@ -335,14 +361,6 @@ static const int margin = 8;
                                                               constant:-0.5],
                                 
                                 [NSLayoutConstraint constraintWithItem:picView
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:superview
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:1.0
-                                                              constant:-1],
-                                
-                                [NSLayoutConstraint constraintWithItem:picView
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:superview
@@ -350,6 +368,18 @@ static const int margin = 8;
                                                             multiplier:0.5
                                                               constant:0],
                                 ]];
+    
+//        //使用Masonry
+//        [picView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(iconView.mas_bottom).offset(margin);
+//            make.left.equalTo(superview.mas_left).offset(0.5);
+//            make.bottom.equalTo(infoLabel.mas_top).offset(-margin);
+//            make.right.equalTo(superview.mas_right).offset(-0.5);
+//    
+//            make.height.equalTo(superview.mas_height).multipliedBy(0.5);
+//            
+//        }];
+
 }
 
 - (void)applyConstraintsToInfoLabel{
@@ -395,6 +425,18 @@ static const int margin = 8;
                                                             multiplier:1
                                                               constant:0],
                                 ]];
+    
+//    //使用Masonry
+//    [infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(picView.mas_bottom).offset(margin);
+//        make.left.equalTo(superview.mas_left).offset(margin);
+//        make.bottom.equalTo(priceLabel.mas_top);
+//        make.right.equalTo(superview.mas_right).offset(-margin);
+//        
+//        make.height.equalTo(usrInfoLabel.mas_height);
+//        
+//    }];
+
 }
 
 - (void)applyConstraintsToPriceLabel{
@@ -436,7 +478,7 @@ static const int margin = 8;
                                 [NSLayoutConstraint constraintWithItem:priceLabel
                                                              attribute:NSLayoutAttributeWidth
                                                              relatedBy:NSLayoutRelationEqual
-                                                                toItem:superview
+                                                                toItem:infoLabel
                                                              attribute:NSLayoutAttributeWidth
                                                             multiplier:1.0
                                                               constant:0],
@@ -449,6 +491,18 @@ static const int margin = 8;
                                                             multiplier:0.5
                                                               constant:0],
                                 ]];
+    
+//    //使用Masonry
+//    [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(infoLabel.mas_bottom);
+//        make.left.equalTo(superview.mas_left).offset(margin);
+//        make.bottom.equalTo(superview.mas_bottom).offset(-margin);
+//        make.right.equalTo(superview.mas_right).offset(-margin);
+//        
+//        make.width.height.equalTo(infoLabel);
+//        
+//    }];
+
     
 }
 
@@ -489,14 +543,6 @@ static const int margin = 8;
                                                               constant:-margin],
                                 
                                 [NSLayoutConstraint constraintWithItem:timeLabel
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:superview
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:0.9
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:timeLabel
                                                              attribute:NSLayoutAttributeHeight
                                                              relatedBy:NSLayoutRelationEqual
                                                                 toItem:priceLabel
@@ -505,6 +551,17 @@ static const int margin = 8;
                                                               constant:0],
                                 ]];
     
+//        //使用Masonry
+//        [timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(infoLabel.mas_bottom);
+//            make.left.equalTo(superview.mas_left).offset(margin);
+//            make.bottom.equalTo(superview.mas_bottom).offset(-margin);
+//            make.right.equalTo(superview.mas_right).offset(-margin);
+//    
+//            make.height.equalTo(priceLabel);
+//            
+//        }];
+
 }
 
 - (void)applyConstraintsToPrimeCostLabel{
@@ -563,6 +620,18 @@ static const int margin = 8;
                                                             multiplier:1.0
                                                               constant:0],
                                 ]];
+    
+//            //使用Masonry
+//            [primeCostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(priceLabel.mas_top);
+//                make.left.equalTo(priceLabel.mas_left).offset(priceLabelSize.width+5);
+//                make.bottom.equalTo(superview.mas_bottom).offset(-margin);
+//                make.right.equalTo(superview.mas_right).offset(-margin);
+//    
+//                make.width.equalTo(superview.mas_width).multipliedBy(0.5);
+//                make.height.equalTo(priceLabel);
+//                
+//            }];
     
 }
 

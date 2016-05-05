@@ -14,12 +14,12 @@
     UIView *superview;
     UIImageView *iconView;//头像view
     UILabel *usrInfoLabel;//用户信息label
-    UILabel *locationLabel;//位置信息label
     
+    UILabel *locationLabel;//位置信息label
     UIImageView *picView;//图片view
     UILabel *infoLabel;//产品信息label
+    
     UILabel *priceLabel;    //价格信息label
-
     UILabel *timeLabel;    //发布时间label
     UILabel *primeCostLabel;//原价信息label
 

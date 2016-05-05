@@ -24,8 +24,7 @@ static NSString *myCollectionCell = @"mycollectionviewcell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    //注册collectionviewlayout
+
     CollectionViewGridLayout *layout = [[CollectionViewGridLayout alloc]init];
     
     _mycollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) collectionViewLayout:layout];
@@ -35,6 +34,7 @@ static NSString *myCollectionCell = @"mycollectionviewcell";
     [_mycollectionView setDataSource:self];
     [self.view addSubview:_mycollectionView];
     
+    //注册CollectionViewCell
     [_mycollectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:myCollectionCell];
     
 }

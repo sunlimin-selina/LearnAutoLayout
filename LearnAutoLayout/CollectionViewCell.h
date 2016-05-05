@@ -10,4 +10,15 @@
 
 @interface CollectionViewCell : UICollectionViewCell
 
+@property(nonatomic,strong) UIImageView *iconView;//头像view
+@property(nonatomic,strong) UILabel *usrInfoLabel;//用户信息label
+
+@property(nonatomic,strong) UILabel *locationLabel;//位置信息label
+@property(nonatomic,strong) UIImageView *picView;//图片view
+@property(nonatomic,strong) UILabel *infoLabel;//产品信息label
+
+@property(nonatomic,strong) UILabel *priceLabel;    //价格信息label
+@property(nonatomic,strong) UILabel *timeLabel;    //发布时间label
+@property(nonatomic,strong) UILabel *primeCostLabel;//原价信息label
+
 @end

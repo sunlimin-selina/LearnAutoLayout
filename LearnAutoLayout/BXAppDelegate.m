@@ -6,13 +6,13 @@
 //  Copyright © 2016年 S.U.N. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "BXAppDelegate.h"
 #import "BXViewController.h"
-@interface AppDelegate ()
+@interface BXAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation BXAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

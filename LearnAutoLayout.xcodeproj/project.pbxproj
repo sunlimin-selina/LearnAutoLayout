@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D0383371CDA295800A41E06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0383361CDA295800A41E06 /* main.m */; };
-		0D03833A1CDA295800A41E06 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0383391CDA295800A41E06 /* AppDelegate.m */; };
+		0D03833A1CDA295800A41E06 /* BXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0383391CDA295800A41E06 /* BXAppDelegate.m */; };
 		0D03833D1CDA295800A41E06 /* BXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03833C1CDA295800A41E06 /* BXViewController.m */; };
 		0D0383421CDA295800A41E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D0383411CDA295800A41E06 /* Assets.xcassets */; };
 		0D0383451CDA295800A41E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0383431CDA295800A41E06 /* LaunchScreen.storyboard */; };
@@ -22,8 +22,8 @@
 /* Begin PBXFileReference section */
 		0D0383321CDA295800A41E06 /* LearnAutoLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnAutoLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D0383361CDA295800A41E06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0D0383381CDA295800A41E06 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0D0383391CDA295800A41E06 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0D0383381CDA295800A41E06 /* BXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BXAppDelegate.h; sourceTree = "<group>"; };
+		0D0383391CDA295800A41E06 /* BXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BXAppDelegate.m; sourceTree = "<group>"; };
 		0D03833B1CDA295800A41E06 /* BXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BXViewController.h; sourceTree = "<group>"; };
 		0D03833C1CDA295800A41E06 /* BXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BXViewController.m; sourceTree = "<group>"; };
 		0D0383411CDA295800A41E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		0D0383341CDA295800A41E06 /* LearnAutoLayout */ = {
 			isa = PBXGroup;
 			children = (
-				0D0383381CDA295800A41E06 /* AppDelegate.h */,
-				0D0383391CDA295800A41E06 /* AppDelegate.m */,
+				0D0383381CDA295800A41E06 /* BXAppDelegate.h */,
+				0D0383391CDA295800A41E06 /* BXAppDelegate.m */,
 				0D03833B1CDA295800A41E06 /* BXViewController.h */,
 				0D03833C1CDA295800A41E06 /* BXViewController.m */,
 				0D03834C1CDA2A7800A41E06 /* CollectionViewGridLayout.h */,
@@ -241,7 +241,7 @@
 				0D03834E1CDA2A7800A41E06 /* CollectionViewGridLayout.m in Sources */,
 				0D0383511CDA2A9200A41E06 /* CollectionViewCell.m in Sources */,
 				0D03833D1CDA295800A41E06 /* BXViewController.m in Sources */,
-				0D03833A1CDA295800A41E06 /* AppDelegate.m in Sources */,
+				0D03833A1CDA295800A41E06 /* BXAppDelegate.m in Sources */,
 				0D0383371CDA295800A41E06 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

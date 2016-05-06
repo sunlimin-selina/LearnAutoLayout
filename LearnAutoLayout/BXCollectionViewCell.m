@@ -36,9 +36,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     self = [super initWithFrame:frame];
     if (self) {
         [self.contentView setBackgroundColor:[UIColor whiteColor]];
-        self.contentView.layer.borderColor = [[UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:0.5f] CGColor];
-        self.contentView.layer.borderWidth = 0.5f;
-        
+
     }
     return self;
 }
@@ -47,7 +45,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 - (UIImageView *)iconView{
     if (!_iconView) {
         _iconView = [[UIImageView alloc]init];
-        _iconView.layer.cornerRadius = 24.f;
+        _iconView.layer.cornerRadius = self.contentView.frame.size.width*0.125;
         [_iconView.layer setMasksToBounds:YES];
         _iconView.translatesAutoresizingMaskIntoConstraints = NO;
     }

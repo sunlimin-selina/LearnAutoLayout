@@ -12,14 +12,30 @@
 
 @interface BXCollectModel : NSObject
 
+/**用户信息*/
 @property (nonatomic,strong) NSString *usrInfo;
+
+/**用户头像*/
 @property (nonatomic,strong) NSString *icon;
+
+/**位置信息*/
 @property (nonatomic,strong) NSString *location;
+
+/**产品图片*/
 @property (nonatomic,strong) NSString *pic;
-@property (nonatomic,strong) NSString *productInfo;//类型Id
+
+/**产品信息*/
+@property (nonatomic,strong) NSString *productInfo;
+
+/**产品价格*/
 @property (nonatomic,strong) NSString *productPrice;
+
+/**上传时间*/
 @property (nonatomic,strong) NSString *updateTime;
+
+/**产品原价*/
 @property (nonatomic,strong) NSString *primeCost;
+
 
 + (BXCollectModel *)modelSetValuesForKeysWithDictionary:(NSDictionary *)dictionary;
 

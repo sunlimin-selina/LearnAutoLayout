@@ -11,7 +11,7 @@
 /**
  A layout that positions and sizes cells based on the numberOfItemsPerLine and aspectRatio properties.
  */
-@interface CollectionViewGridLayout : UICollectionViewLayout
+@interface BXCollectionViewGridLayout : UICollectionViewLayout
 
 /**
  Controls whether or not the user scrolls vertically or horizontally.

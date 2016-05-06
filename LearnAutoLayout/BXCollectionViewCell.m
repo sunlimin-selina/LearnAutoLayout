@@ -6,17 +6,30 @@
 //  Copyright (c) 2015年 M.A.O. All rights reserved.
 //
 
-#import "CollectionViewCell.h"
+#import "BXCollectionViewCell.h"
 #import <Masonry/Masonry.h>
 
 static const CGFloat margin = 8;
+static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
-
-@interface CollectionViewCell()
+@interface BXCollectionViewCell()
 
 @end
 
-@implementation CollectionViewCell
+@implementation BXCollectionViewCell
+
++ (BXCollectionViewCell *)cellWithCollectionView:(UICollectionView *)collectionView AtIndexPath:(NSIndexPath *)indexPath andCollectModel:(BXCollectModel *)bxModel{
+    
+    BXCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BXCollectionCell forIndexPath:indexPath];
+    [cell sizeToFit];
+    
+    [cell setupCellElementWithModelData:bxModel];
+
+    [cell setupCollectionCellElement];
+
+
+    return cell;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,16 +39,19 @@ static const CGFloat margin = 8;
         self.contentView.layer.borderColor = [[UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:0.5f] CGColor];
         self.contentView.layer.borderWidth = 0.5f;
         
-        [self setupCollectionCellElement];
+//        [self setupCollectionCellElement];
+
+        
     }
     return self;
 }
 
+
+
 #pragma mark - Getter
--(UIImageView *)iconView{
+- (UIImageView *)iconView{
     if (!_iconView) {
         _iconView = [[UIImageView alloc]init];
-        _iconView.image = [UIImage imageNamed:@"myicon.jpg"];
         _iconView.layer.cornerRadius = _iconView.frame.size.width/2;
         [_iconView.layer setMasksToBounds:YES];
         _iconView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -44,26 +60,24 @@ static const CGFloat margin = 8;
     return _iconView;
 }
 
--(UILabel *)usrInfoLabel{
+- (UILabel *)usrInfoLabel{
     if (!_usrInfoLabel) {
         _usrInfoLabel = UILabel.new;
         _usrInfoLabel.numberOfLines = 1;
         _usrInfoLabel.textColor = [UIColor blackColor];
         _usrInfoLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _usrInfoLabel.text = @"Tippioooooooooooooooooooo";
         _usrInfoLabel.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _usrInfoLabel;
 }
 
--(UILabel *)locationLabel{
+- (UILabel *)locationLabel{
     if (!_locationLabel) {
         _locationLabel = UILabel.new;
         _locationLabel.textColor = [UIColor redColor];
         _locationLabel.textAlignment = NSTextAlignmentLeft;
         _locationLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _locationLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        _locationLabel.text = @"上海";
         _locationLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_locationLabel];
 
@@ -71,20 +85,18 @@ static const CGFloat margin = 8;
     return _locationLabel;
 }
 
--(UIImageView *)picView{
+- (UIImageView *)picView{
     if (!_picView) {
         _picView = UIImageView.new;
-        _picView.image = [UIImage imageNamed:@"picture.jpg"];
         _picView.backgroundColor = UIColor.redColor;
         _picView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _picView;
 }
 
--(UILabel *)infoLabel{
+- (UILabel *)infoLabel{
     if (!_infoLabel) {
         _infoLabel = UILabel.new;
-        _infoLabel.text = @"组团去迪拜组团去迪拜组团去迪拜";
         _infoLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _infoLabel.textColor = UIColor.blackColor;
         _infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -95,7 +107,6 @@ static const CGFloat margin = 8;
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
         _priceLabel = UILabel.new;
-        _priceLabel.text = @"999元";
         _priceLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _priceLabel.textColor = UIColor.redColor;
         _priceLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -107,7 +118,7 @@ static const CGFloat margin = 8;
     if (!_primeCostLabel) {
         _primeCostLabel = UILabel.new;
         _primeCostLabel.translatesAutoresizingMaskIntoConstraints = NO;
-
+        
         NSAttributedString *attrStr =
         [[NSAttributedString alloc]initWithString:@"1888元"
                                        attributes:
@@ -124,7 +135,6 @@ static const CGFloat margin = 8;
 - (UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = UILabel.new;
-        _timeLabel.text = @"3分钟前";
         _timeLabel.font = [UIFont fontWithName:@"Helvetica" size:10.f];
         _timeLabel.textColor = UIColor.grayColor;
         _timeLabel.textAlignment = NSTextAlignmentRight;
@@ -133,7 +143,7 @@ static const CGFloat margin = 8;
     return _timeLabel;
 }
 
--(void)setupCollectionCellElement
+- (void)setupCollectionCellElement
 {
     [self.contentView addSubview:self.iconView];
     [self.contentView addSubview:self.usrInfoLabel];
@@ -156,59 +166,33 @@ static const CGFloat margin = 8;
     
 }
 
+- (void)setupCellElementWithModelData:(BXCollectModel *)bxModel{
+    self.iconView.image = [UIImage imageNamed:bxModel.icon];
+    self.usrInfoLabel.text = bxModel.usrInfo;
+    self.locationLabel.text = bxModel.location;
+    self.picView.image = [UIImage imageNamed:bxModel.pic];
+    self.infoLabel.text = bxModel.productInfo;
+    self.priceLabel.text = bxModel.productPrice;
+    self.timeLabel.text = bxModel.updateTime;
+    
+}
+
 - (void)applyConstraintsToIconView{
     //NSLayoutConstraint添加约束
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_picView
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:0.25
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_iconView
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:0.2
-                                                              constant:0],
-                                ]];
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:margin];
     
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
+    
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_picView attribute:NSLayoutAttributeTop multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeLeft multiplier:1.0f constant:-margin];
+    
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.25f constant:0];
+    
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.2f constant:0];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,widthConstraint,heightConstraint]];
+
 //    //使用Masonry
 //    [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self.mas_top).offset(margin);

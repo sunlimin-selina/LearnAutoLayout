@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Kevin Lundberg. All rights reserved.
 //
 
-#import "CollectionViewGridLayout.h"
+#import "BXCollectionViewGridLayout.h"
 
-@interface CollectionViewGridLayout ()
+@interface BXCollectionViewGridLayout ()
 @property (nonatomic, strong) NSMutableArray *attributesBySection;
 @property (nonatomic, assign, readwrite) CGFloat collectionViewContentLength;
 @end
 
-@implementation CollectionViewGridLayout
+@implementation BXCollectionViewGridLayout
 
 - (instancetype)init
 {
@@ -132,6 +132,7 @@
         [self.attributesBySection addObject:[self layoutAttributesForItemsInSection:section]];
     }
 }
+
 
 - (NSArray *)layoutAttributesForItemsInSection:(NSInteger)section
 {

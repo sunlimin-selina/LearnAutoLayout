@@ -12,8 +12,9 @@
 		0D03833D1CDA295800A41E06 /* BXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03833C1CDA295800A41E06 /* BXViewController.m */; };
 		0D0383421CDA295800A41E06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D0383411CDA295800A41E06 /* Assets.xcassets */; };
 		0D0383451CDA295800A41E06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0383431CDA295800A41E06 /* LaunchScreen.storyboard */; };
-		0D03834E1CDA2A7800A41E06 /* CollectionViewGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03834D1CDA2A7800A41E06 /* CollectionViewGridLayout.m */; };
-		0D0383511CDA2A9200A41E06 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0383501CDA2A9200A41E06 /* CollectionViewCell.m */; };
+		0D03834E1CDA2A7800A41E06 /* BXCollectionViewGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D03834D1CDA2A7800A41E06 /* BXCollectionViewGridLayout.m */; };
+		0D0383511CDA2A9200A41E06 /* BXCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0383501CDA2A9200A41E06 /* BXCollectionViewCell.m */; };
+		0DB922081CDB776A000E31A6 /* BXCollectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB922071CDB776A000E31A6 /* BXCollectModel.m */; };
 		B8361F5C297902EC503D75DC /* Pods_LearnAutoLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0EB1957D5F4A4FE8E7B704 /* Pods_LearnAutoLayout.framework */; };
 		D3ED27831CDAE4E80013D4F5 /* picture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3ED27811CDAE4E80013D4F5 /* picture.jpg */; };
 		D3ED27851CDB1C400013D4F5 /* myicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3ED27841CDB1C400013D4F5 /* myicon.jpg */; };
@@ -29,10 +30,12 @@
 		0D0383411CDA295800A41E06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D0383441CDA295800A41E06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D0383461CDA295800A41E06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D03834C1CDA2A7800A41E06 /* CollectionViewGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewGridLayout.h; sourceTree = "<group>"; };
-		0D03834D1CDA2A7800A41E06 /* CollectionViewGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewGridLayout.m; sourceTree = "<group>"; };
-		0D03834F1CDA2A9200A41E06 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
-		0D0383501CDA2A9200A41E06 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		0D03834C1CDA2A7800A41E06 /* BXCollectionViewGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCollectionViewGridLayout.h; sourceTree = "<group>"; };
+		0D03834D1CDA2A7800A41E06 /* BXCollectionViewGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCollectionViewGridLayout.m; sourceTree = "<group>"; };
+		0D03834F1CDA2A9200A41E06 /* BXCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCollectionViewCell.h; sourceTree = "<group>"; };
+		0D0383501CDA2A9200A41E06 /* BXCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCollectionViewCell.m; sourceTree = "<group>"; };
+		0DB922061CDB776A000E31A6 /* BXCollectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BXCollectModel.h; sourceTree = "<group>"; };
+		0DB922071CDB776A000E31A6 /* BXCollectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BXCollectModel.m; sourceTree = "<group>"; };
 		3161880878331A0BE2C64B42 /* Pods-LearnAutoLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAutoLayout.release.xcconfig"; path = "Pods/Target Support Files/Pods-LearnAutoLayout/Pods-LearnAutoLayout.release.xcconfig"; sourceTree = "<group>"; };
 		9E9DB1C99FDCA072211A3CD6 /* Pods-LearnAutoLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LearnAutoLayout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LearnAutoLayout/Pods-LearnAutoLayout.debug.xcconfig"; sourceTree = "<group>"; };
 		D3ED27811CDAE4E80013D4F5 /* picture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picture.jpg; sourceTree = "<group>"; };
@@ -77,10 +80,12 @@
 				0D0383391CDA295800A41E06 /* BXAppDelegate.m */,
 				0D03833B1CDA295800A41E06 /* BXViewController.h */,
 				0D03833C1CDA295800A41E06 /* BXViewController.m */,
-				0D03834C1CDA2A7800A41E06 /* CollectionViewGridLayout.h */,
-				0D03834D1CDA2A7800A41E06 /* CollectionViewGridLayout.m */,
-				0D03834F1CDA2A9200A41E06 /* CollectionViewCell.h */,
-				0D0383501CDA2A9200A41E06 /* CollectionViewCell.m */,
+				0D03834C1CDA2A7800A41E06 /* BXCollectionViewGridLayout.h */,
+				0D03834D1CDA2A7800A41E06 /* BXCollectionViewGridLayout.m */,
+				0D03834F1CDA2A9200A41E06 /* BXCollectionViewCell.h */,
+				0D0383501CDA2A9200A41E06 /* BXCollectionViewCell.m */,
+				0DB922061CDB776A000E31A6 /* BXCollectModel.h */,
+				0DB922071CDB776A000E31A6 /* BXCollectModel.m */,
 				0D0383411CDA295800A41E06 /* Assets.xcassets */,
 				0D0383431CDA295800A41E06 /* LaunchScreen.storyboard */,
 				0D0383461CDA295800A41E06 /* Info.plist */,
@@ -238,8 +243,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D03834E1CDA2A7800A41E06 /* CollectionViewGridLayout.m in Sources */,
-				0D0383511CDA2A9200A41E06 /* CollectionViewCell.m in Sources */,
+				0DB922081CDB776A000E31A6 /* BXCollectModel.m in Sources */,
+				0D03834E1CDA2A7800A41E06 /* BXCollectionViewGridLayout.m in Sources */,
+				0D0383511CDA2A9200A41E06 /* BXCollectionViewCell.m in Sources */,
 				0D03833D1CDA295800A41E06 /* BXViewController.m in Sources */,
 				0D03833A1CDA295800A41E06 /* BXAppDelegate.m in Sources */,
 				0D0383371CDA295800A41E06 /* main.m in Sources */,

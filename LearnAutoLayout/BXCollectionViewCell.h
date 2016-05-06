@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BXCollectModel.h"
 
-@interface CollectionViewCell : UICollectionViewCell
+@interface BXCollectionViewCell : UICollectionViewCell
 
 @property(nonatomic,strong) UIImageView *iconView;//头像view
 @property(nonatomic,strong) UILabel *usrInfoLabel;//用户信息label
@@ -20,5 +21,7 @@
 @property(nonatomic,strong) UILabel *priceLabel;    //价格信息label
 @property(nonatomic,strong) UILabel *timeLabel;    //发布时间label
 @property(nonatomic,strong) UILabel *primeCostLabel;//原价信息label
+
++ (BXCollectionViewCell *)cellWithCollectionView:(UICollectionView *)collectionView AtIndexPath:(NSIndexPath *)indexPath andCollectModel:(BXCollectModel *)bxModel;
 
 @end

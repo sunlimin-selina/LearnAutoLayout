@@ -7,9 +7,11 @@
 //
 
 #import "BXViewController.h"
-#import "CollectionViewGridLayout.h"
-#import "CollectionViewCell.h"
-static NSString *myCollectionCell = @"mycollectionviewcell";
+#import "BXCollectionViewGridLayout.h"
+#import "BXCollectionViewCell.h"
+#import "BXCollectModel.h"
+
+static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
@@ -24,7 +26,7 @@ static NSString *myCollectionCell = @"mycollectionviewcell";
 
 -(UICollectionView *)mycollectionView{
     if (!_mycollectionView) {
-        CollectionViewGridLayout *layout = [[CollectionViewGridLayout alloc]init];
+        BXCollectionViewGridLayout *layout = [[BXCollectionViewGridLayout alloc]init];
 
         _mycollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) collectionViewLayout:layout];
         [_mycollectionView setContentInset:UIEdgeInsetsMake(100, 0, 0, 0)];
@@ -38,11 +40,11 @@ static NSString *myCollectionCell = @"mycollectionviewcell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor colorWithRed:240.f/255.f green:240.f/255.f blue:240.f/255.f alpha:1];
     [self.view addSubview:self.mycollectionView];
     
     //注册CollectionViewCell
-    [_mycollectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:myCollectionCell];
+    [_mycollectionView registerClass:[BXCollectionViewCell class] forCellWithReuseIdentifier:BXCollectionCell];
     
 }
 
@@ -67,10 +69,16 @@ static NSString *myCollectionCell = @"mycollectionviewcell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:myCollectionCell forIndexPath:indexPath];
-    [cell sizeToFit];
+    NSArray* BXDataArray = @[@{@"icon":@"myicon.jpg",@"usrInfo":@"Tippiooooooooooo",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"组团去迪拜组团去迪拜组团去迪拜",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}];
+
+    BXCollectModel* CollectModel = [BXCollectModel modelSetValuesForKeysWithDictionary:BXDataArray[0]];
+
+    BXCollectionViewCell *cell = [BXCollectionViewCell cellWithCollectionView:collectionView AtIndexPath:indexPath andCollectModel:CollectModel];
+
     return cell;
 }
+
+
 
 #pragma mark -- UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

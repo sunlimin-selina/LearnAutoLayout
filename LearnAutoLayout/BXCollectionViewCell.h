@@ -7,21 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BXCollectModel.h"
+//#import "BXCollectModel.h"
+
+@class BXCollectModel;
 
 @interface BXCollectionViewCell : UICollectionViewCell
 
-@property(nonatomic,strong) UIImageView *iconView;//头像view
-@property(nonatomic,strong) UILabel *usrInfoLabel;//用户信息label
+@property(nonatomic, strong, readonly) UIImageView *iconView;   //头像view
+@property(nonatomic, strong, readonly) UILabel *usrInfoLabel;   //用户信息label
 
-@property(nonatomic,strong) UILabel *locationLabel;//位置信息label
-@property(nonatomic,strong) UIImageView *picView;//图片view
-@property(nonatomic,strong) UILabel *infoLabel;//产品信息label
+@property(nonatomic, strong, readonly) UILabel *locationLabel;  //位置信息label
+@property(nonatomic, strong, readonly) UIImageView *picView;    //图片view
+@property(nonatomic, strong, readonly) UILabel *infoLabel;      //产品信息label
 
-@property(nonatomic,strong) UILabel *priceLabel;    //价格信息label
-@property(nonatomic,strong) UILabel *timeLabel;    //发布时间label
-@property(nonatomic,strong) UILabel *primeCostLabel;//原价信息label
-
-+ (BXCollectionViewCell *)cellWithCollectionView:(UICollectionView *)collectionView AtIndexPath:(NSIndexPath *)indexPath andCollectModel:(BXCollectModel *)bxModel;
+@property(nonatomic, strong, readonly) UILabel *priceLabel;     //价格信息label
+@property(nonatomic, strong, readonly) UILabel *timeLabel;      //发布时间label
+@property(nonatomic, strong, readonly) UILabel *primeCostLabel; //原价信息label
 
 @end

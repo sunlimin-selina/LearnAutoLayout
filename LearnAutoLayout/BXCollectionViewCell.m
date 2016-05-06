@@ -56,7 +56,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)usrInfoLabel{
     if (!_usrInfoLabel) {
-        _usrInfoLabel = UILabel.new;
+        _usrInfoLabel = [UILabel new];
         _usrInfoLabel.numberOfLines = 1;
         _usrInfoLabel.textColor = [UIColor blackColor];
         _usrInfoLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -67,7 +67,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)locationLabel{
     if (!_locationLabel) {
-        _locationLabel = UILabel.new;
+        _locationLabel = [UILabel new];
         _locationLabel.textColor = [UIColor redColor];
         _locationLabel.textAlignment = NSTextAlignmentLeft;
         _locationLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
@@ -80,7 +80,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UIImageView *)picView{
     if (!_picView) {
-        _picView = UIImageView.new;
+        _picView = [UIImageView new];
         _picView.backgroundColor = UIColor.redColor;
         _picView.translatesAutoresizingMaskIntoConstraints = NO;
     }
@@ -89,7 +89,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)infoLabel{
     if (!_infoLabel) {
-        _infoLabel = UILabel.new;
+        _infoLabel = [UILabel new];
         _infoLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _infoLabel.textColor = UIColor.blackColor;
         _infoLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -99,7 +99,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)priceLabel{
     if (!_priceLabel) {
-        _priceLabel = UILabel.new;
+        _priceLabel = [UILabel new];
         _priceLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _priceLabel.textColor = UIColor.redColor;
         _priceLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -109,7 +109,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)primeCostLabel{
     if (!_primeCostLabel) {
-        _primeCostLabel = UILabel.new;
+        _primeCostLabel = [UILabel new];
         _primeCostLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         NSAttributedString *attrStr =
@@ -127,7 +127,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UILabel *)timeLabel{
     if (!_timeLabel) {
-        _timeLabel = UILabel.new;
+        _timeLabel = [UILabel new];
         _timeLabel.font = [UIFont fontWithName:@"Helvetica" size:10.f];
         _timeLabel.textColor = UIColor.grayColor;
         _timeLabel.textAlignment = NSTextAlignmentRight;
@@ -164,7 +164,6 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     [self applyConstraintsToPriceLabel];     // 价格信息label约束
     [self applyConstraintsToTimeLabel];      // 发布时间label约束
     [self applyConstraintsToPrimeCostLabel]; // 原价信息label约束
-    
 
 }
 

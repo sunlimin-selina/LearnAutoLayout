@@ -23,7 +23,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 @implementation BXViewController
 
-- (UICollectionView *)mycollectionView{
+- (UICollectionView *)mycollectionView {
     if (!_mycollectionView) {
         BXCollectionViewGridLayout *layout = [[BXCollectionViewGridLayout alloc]init];
 
@@ -36,8 +36,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     return _mycollectionView;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:240.f/255.f green:240.f/255.f blue:240.f/255.f alpha:1];
     [self.view addSubview:self.mycollectionView];
@@ -48,8 +47,7 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     self.BXDataArray = @[@{@"icon":@"myicon.jpg",@"usrInfo":@"Tippiooooooooooo",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"组团去迪拜组团去迪拜组团去迪拜",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -57,25 +55,21 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 20;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
 
     BXCollectModel* CollectModel = [BXCollectModel modelSetValuesForKeysWithDictionary:self.BXDataArray[0]];
 
     BXCollectionViewCell *cell = [BXCollectionViewCell cellWithCollectionView:collectionView AtIndexPath:indexPath andCollectModel:CollectModel];
 
-
-    return cell;
+     return cell;
 }
 
 
@@ -84,5 +78,6 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"didSelected");
 }
+
 
 @end

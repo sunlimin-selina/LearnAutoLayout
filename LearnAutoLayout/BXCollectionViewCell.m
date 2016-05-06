@@ -9,7 +9,9 @@
 #import "BXCollectionViewCell.h"
 #import <Masonry/Masonry.h>
 
-static const CGFloat margin = 8;
+static const CGFloat margin = 8.0f;
+static const CGFloat noMargin = 0.0f;
+
 static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 @interface BXCollectionViewCell()
@@ -21,12 +23,10 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 + (BXCollectionViewCell *)cellWithCollectionView:(UICollectionView *)collectionView AtIndexPath:(NSIndexPath *)indexPath andCollectModel:(BXCollectModel *)bxModel{
     
     BXCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:BXCollectionCell forIndexPath:indexPath];
-    [cell sizeToFit];
-    
+
     [cell setupCellElementWithModelData:bxModel];
 
-    [cell setupCollectionCellElement];
-
+    [cell sizeToFit];
 
     return cell;
 }
@@ -39,23 +39,17 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
         self.contentView.layer.borderColor = [[UIColor colorWithRed:175.0f/255.0f green:175.0f/255.0f blue:175.0f/255.0f alpha:0.5f] CGColor];
         self.contentView.layer.borderWidth = 0.5f;
         
-//        [self setupCollectionCellElement];
-
-        
     }
     return self;
 }
-
-
 
 #pragma mark - Getter
 - (UIImageView *)iconView{
     if (!_iconView) {
         _iconView = [[UIImageView alloc]init];
-        _iconView.layer.cornerRadius = _iconView.frame.size.width/2;
+        _iconView.layer.cornerRadius = 24.f;
         [_iconView.layer setMasksToBounds:YES];
         _iconView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView addSubview:_iconView];
     }
     return _iconView;
 }
@@ -79,7 +73,6 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
         _locationLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         _locationLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _locationLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_locationLabel];
 
     }
     return _locationLabel;
@@ -143,8 +136,17 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     return _timeLabel;
 }
 
-- (void)setupCollectionCellElement
-{
+#pragma mark - Setup
+
+- (void)setupCellElementWithModelData:(BXCollectModel *)bxModel{
+    self.iconView.image = [UIImage imageNamed:bxModel.icon];
+    self.usrInfoLabel.text = bxModel.usrInfo;
+    self.locationLabel.text = bxModel.location;
+    self.picView.image = [UIImage imageNamed:bxModel.pic];
+    self.infoLabel.text = bxModel.productInfo;
+    self.priceLabel.text = bxModel.productPrice;
+    self.timeLabel.text = bxModel.updateTime;
+
     [self.contentView addSubview:self.iconView];
     [self.contentView addSubview:self.usrInfoLabel];
     [self.contentView addSubview:self.locationLabel];
@@ -153,7 +155,6 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     [self.contentView addSubview:self.priceLabel];
     [self.contentView addSubview:self.primeCostLabel];
     [self.contentView addSubview:self.timeLabel];
-
 
     [self applyConstraintsToIconView];       // 头像_iconView约束
     [self applyConstraintsToUsrInfoLabel];   // 用户信息label约束
@@ -164,32 +165,22 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     [self applyConstraintsToTimeLabel];      // 发布时间label约束
     [self applyConstraintsToPrimeCostLabel]; // 原价信息label约束
     
-}
 
-- (void)setupCellElementWithModelData:(BXCollectModel *)bxModel{
-    self.iconView.image = [UIImage imageNamed:bxModel.icon];
-    self.usrInfoLabel.text = bxModel.usrInfo;
-    self.locationLabel.text = bxModel.location;
-    self.picView.image = [UIImage imageNamed:bxModel.pic];
-    self.infoLabel.text = bxModel.productInfo;
-    self.priceLabel.text = bxModel.productPrice;
-    self.timeLabel.text = bxModel.updateTime;
-    
 }
 
 - (void)applyConstraintsToIconView{
     //NSLayoutConstraint添加约束
-    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:margin];
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:margin];
     
-    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
     
     NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_picView attribute:NSLayoutAttributeTop multiplier:1.0f constant:-margin];
 
     NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeLeft multiplier:1.0f constant:-margin];
     
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeWidth multiplier:0.25f constant:0];
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:0.25f constant:noMargin];
     
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:0.2f constant:0];
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_iconView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:0.2f constant:noMargin];
 
     [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,widthConstraint,heightConstraint]];
 
@@ -208,50 +199,19 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToUsrInfoLabel{
-    
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_iconView
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_locationLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_iconView
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:0.5
-                                                              constant:0],
-                                
-                                ]];
+
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_usrInfoLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_usrInfoLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_iconView attribute:NSLayoutAttributeRight multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_usrInfoLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_locationLabel attribute:NSLayoutAttributeTop multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_usrInfoLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_usrInfoLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_iconView attribute:NSLayoutAttributeHeight multiplier:0.5f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
     
 //    [usrInfoLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
@@ -270,49 +230,20 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToLocationLabel{
-    
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_locationLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_locationLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_locationLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_picView
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_locationLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_locationLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:1.0
-                                                              constant:0],
-                                ]];
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeLeft multiplier:1.0f constant:0];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_picView attribute:NSLayoutAttributeTop multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:0.25f constant:0];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_locationLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeHeight multiplier:1.0f constant:0.0f];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,widthConstraint,heightConstraint]];
     
 //    //使用Masonry
 //    [locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -327,50 +258,19 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToPicView{
-    
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_picView
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_iconView
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_picView
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:0.5],
-                                
-                                [NSLayoutConstraint constraintWithItem:_picView
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_infoLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_picView
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-0.5],
-                                
-                                [NSLayoutConstraint constraintWithItem:_picView
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:0.5
-                                                              constant:0],
-                                ]];
-    
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_picView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_iconView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_picView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_picView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_infoLabel attribute:NSLayoutAttributeTop multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_picView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_picView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeHeight multiplier:0.5f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
+
 //        //使用Masonry
 //        [picView mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(_iconView.mas_bottom).offset(margin);
@@ -385,50 +285,19 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToInfoLabel{
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_infoLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_picView
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_infoLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_infoLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_priceLabel
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_infoLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_picView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:margin];
 
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_infoLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_infoLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_usrInfoLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:1
-                                                              constant:0],
-                                ]];
-    
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_infoLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_infoLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_priceLabel attribute:NSLayoutAttributeTop multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_infoLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_infoLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_usrInfoLabel attribute:NSLayoutAttributeHeight multiplier:1.0f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
+
 //    //使用Masonry
 //    [infoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(picView.mas_bottom).offset(margin);
@@ -443,58 +312,22 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToPriceLabel{
- 
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_infoLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_infoLabel
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_priceLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_infoLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:0.5
-                                                              constant:0],
-                                ]];
-    
+
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_infoLabel attribute:NSLayoutAttributeBottom multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_infoLabel attribute:NSLayoutAttributeWidth multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_priceLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_infoLabel attribute:NSLayoutAttributeHeight multiplier:0.5f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,widthConstraint,heightConstraint]];
+
 //    //使用Masonry
 //    [priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(infoLabel.mas_bottom);
@@ -510,50 +343,20 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 }
 
 - (void)applyConstraintsToTimeLabel{
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_timeLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_infoLabel attribute:NSLayoutAttributeBottom multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_timeLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:margin];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_timeLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_timeLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_timeLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_priceLabel attribute:NSLayoutAttributeHeight multiplier:1.0f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
     
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_timeLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_infoLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_timeLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_timeLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_timeLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_timeLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_priceLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:1.0
-                                                              constant:0],
-                                ]];
-    
+
 //        //使用Masonry
 //        [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(infoLabel.mas_bottom);
@@ -571,58 +374,22 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     
     CGSize priceLabelSize = [_priceLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14.0f]}];
     //根据计算结果重新设置UILabel的尺寸
-    
-    [self addConstraints:@[
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_priceLabel
-                                                             attribute:NSLayoutAttributeTop
-                                                            multiplier:1.0
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_priceLabel
-                                                             attribute:NSLayoutAttributeLeft
-                                                            multiplier:1.0
-                                                              constant:priceLabelSize.width+5],
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeBottom
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeBottom
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeRight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeRight
-                                                            multiplier:1.0
-                                                              constant:-margin],
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeWidth
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:self
-                                                             attribute:NSLayoutAttributeWidth
-                                                            multiplier:0.5
-                                                              constant:0],
-                                
-                                [NSLayoutConstraint constraintWithItem:_primeCostLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                             relatedBy:NSLayoutRelationEqual
-                                                                toItem:_priceLabel
-                                                             attribute:NSLayoutAttributeHeight
-                                                            multiplier:1.0
-                                                              constant:0],
-                                ]];
-    
+
+    //NSLayoutConstraint添加约束
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_priceLabel attribute:NSLayoutAttributeTop multiplier:1.0f constant:noMargin];
+
+    NSLayoutConstraint *leftConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_priceLabel attribute:NSLayoutAttributeLeft multiplier:1.0f constant:priceLabelSize.width+5];
+
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *rightConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0f constant:-margin];
+
+    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:0.5f constant:noMargin];
+
+    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_primeCostLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_priceLabel attribute:NSLayoutAttributeHeight multiplier:1.0f constant:noMargin];
+
+    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,widthConstraint,heightConstraint]];
+
 //            //使用Masonry
 //            [_primeCostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //                make.top.equalTo(priceLabel.mas_top);
@@ -636,14 +403,6 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 //            }];
     
 }
-
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    _iconView.layer.cornerRadius = _iconView.frame.size.width/2;
-    [_iconView.layer setMasksToBounds:YES];
- }
-
 
 
 @end

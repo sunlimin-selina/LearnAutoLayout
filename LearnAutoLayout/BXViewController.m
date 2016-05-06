@@ -13,22 +13,21 @@
 
 static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
-#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
-#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
-
 @interface BXViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic,strong)    UICollectionView *mycollectionView;
+
+@property (nonatomic,strong)    NSArray* BXDataArray;
 
 @end
 
 @implementation BXViewController
 
--(UICollectionView *)mycollectionView{
+- (UICollectionView *)mycollectionView{
     if (!_mycollectionView) {
         BXCollectionViewGridLayout *layout = [[BXCollectionViewGridLayout alloc]init];
 
-        _mycollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) collectionViewLayout:layout];
+        _mycollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) collectionViewLayout:layout];
         [_mycollectionView setContentInset:UIEdgeInsetsMake(100, 0, 0, 0)];
         [_mycollectionView setBackgroundColor:[UIColor clearColor]];
         [_mycollectionView setDelegate:self];
@@ -45,7 +44,8 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
     
     //注册CollectionViewCell
     [_mycollectionView registerClass:[BXCollectionViewCell class] forCellWithReuseIdentifier:BXCollectionCell];
-    
+
+    self.BXDataArray = @[@{@"icon":@"myicon.jpg",@"usrInfo":@"Tippiooooooooooo",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"组团去迪拜组团去迪拜组团去迪拜",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,11 +69,11 @@ static NSString *BXCollectionCell = @"bxcollectionviewcell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray* BXDataArray = @[@{@"icon":@"myicon.jpg",@"usrInfo":@"Tippiooooooooooo",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"组团去迪拜组团去迪拜组团去迪拜",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}];
 
-    BXCollectModel* CollectModel = [BXCollectModel modelSetValuesForKeysWithDictionary:BXDataArray[0]];
+    BXCollectModel* CollectModel = [BXCollectModel modelSetValuesForKeysWithDictionary:self.BXDataArray[0]];
 
     BXCollectionViewCell *cell = [BXCollectionViewCell cellWithCollectionView:collectionView AtIndexPath:indexPath andCollectModel:CollectModel];
+
 
     return cell;
 }

@@ -14,7 +14,7 @@ static const CGFloat noMargin = 0.0f;
 
 @interface BXCollectionViewCell()
 
-@property(nonatomic, strong) UIImageView *iconView;   //头像view
+//@property(nonatomic, strong, readwrite) UIImageView *iconView;   //头像view
 @property(nonatomic, strong) UILabel *usrInfoLabel;   //用户信息label
 
 @property(nonatomic, strong) UILabel *locationLabel;  //位置信息label
@@ -29,7 +29,10 @@ static const CGFloat noMargin = 0.0f;
 
 @implementation BXCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame {
+@synthesize iconView = _iconView;
+
+- (id)initWithFrame:(CGRect)frame
+{
     self = [super initWithFrame:frame];
     if (self) {
         [self.contentView setBackgroundColor:[UIColor whiteColor]];
@@ -57,6 +60,7 @@ static const CGFloat noMargin = 0.0f;
 }
 
 #pragma mark - Getter
+
 - (UIImageView *)iconView {
     if (!_iconView) {
         _iconView = [[UIImageView alloc]init];
@@ -191,7 +195,9 @@ static const CGFloat noMargin = 0.0f;
 
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.usrInfoLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.iconView attribute:NSLayoutAttributeHeight multiplier:0.5f constant:noMargin];
 
-    [NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
+    [self.contentView addConstraints:@[]];
+
+    //[NSLayoutConstraint activateConstraints:@[topConstraint,leftConstraint,bottomConstraint,rightConstraint,heightConstraint]];
     
 //    [usrInfoLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     

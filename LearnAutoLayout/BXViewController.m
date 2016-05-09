@@ -47,7 +47,14 @@ static const CGFloat margin = 30.0f;
 
     self.view.backgroundColor = [UIColor colorWithRed:240.f/255.f green:240.f/255.f blue:240.f/255.f alpha:1];
 
-      NSArray<NSDictionary *>* bxDataArray = @[@{@"icon":@"myicon.jpg",@"userInfo":@"User_102931023122",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"},@{@"icon":@"myicon.jpg",@"userInfo":@"User_102931023122",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"},@{@"icon":@"myicon.jpg",@"userInfo":@"User_102931023122",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}];
+    NSArray<NSDictionary *> *bxDataArray = @[
+        @{@"icon":@"myicon.jpg",
+          @"userInfo":@"User_102931023122",
+          @"location":@"上海",
+          @"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"},
+       @{@"icon":@"myicon.jpg",@"userInfo":@"User_102931023122",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"},
+      @{@"icon":@"myicon.jpg",@"userInfo":@"User_102931023122",@"location":@"上海",@"pic":@"picture.jpg",@"productInfo":@"休闲度假、团队拓展、趣味活动团队旅游上海出发",@"productPrice":@"999元",@"updateTime":@"3分钟前",@"primeCost":@"1888元"}
+    ];
 
     self.modelsArray = [[NSMutableArray alloc]init];
 
@@ -62,11 +69,6 @@ static const CGFloat margin = 30.0f;
     [self.mycollectionView registerClass:[BXCollectionViewCell class] forCellWithReuseIdentifier:kBXCollectionCellIdentifier];
 
 
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -109,15 +111,12 @@ static const CGFloat margin = 30.0f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat currentWidth = self.view.bounds.size.width;
-    return (CGSize){(currentWidth - margin)/2, (currentWidth - margin)/2+60};
+    return (CGSize){(currentWidth - margin)/2, (currentWidth - margin)/2 + 60};
 }
 
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, 10, 0, 10);
 }
-
-
-
 
 @end

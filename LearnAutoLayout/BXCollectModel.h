@@ -13,21 +13,14 @@
 @interface BXCollectModel : NSObject
 
 
-@property (nonatomic,strong) NSString *userInfo;     // 用户信息
-
-@property (nonatomic,strong) NSString *iconUrl;      // 用户头像
-
-@property (nonatomic,strong) NSString *locationInfo; // 位置信息
-
-@property (nonatomic,strong) NSString *pictureUrl;   // 图片URL
-
-@property (nonatomic,strong) NSString *productInfo;  // 产品信息
-
-@property (nonatomic,strong) NSString *productPrice; // 产品价格
-
-@property (nonatomic,strong) NSString *updateTime;   // 上传时间
-
-@property (nonatomic,strong) NSString *primeCost;    // 产品原价
+@property (nonatomic, copy) NSString *userInfo;     // 用户信息
+@property (nonatomic, copy) NSString *iconUrl;      // 用户头像
+@property (nonatomic, copy) NSString *locationInfo; // 位置信息
+@property (nonatomic, copy) NSString *pictureUrl;   // 图片URL
+@property (nonatomic, copy) NSString *productInfo;  // 产品信息
+@property (nonatomic, copy) NSString *productPrice; // 产品价格
+@property (nonatomic, copy) NSString *updateTime;   // 上传时间
+@property (nonatomic, copy) NSString *primeCost;    // 产品原价
 
 
 + (instancetype)modelWithDictionary:(NSDictionary *)dictionary;

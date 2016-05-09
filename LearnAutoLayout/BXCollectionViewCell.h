@@ -13,8 +13,8 @@
 
 @interface BXCollectionViewCell : UICollectionViewCell
 
-@property(nonatomic, strong, readonly) UIImageView *iconView;   //头像view
-@property(nonatomic, strong, readonly) UILabel *usrInfoLabel;   //用户信息label
+@property (nonatomic, strong, readonly) UIImageView *iconView;   //头像view
+@property (nonatomic, strong, readonly) UILabel *usrInfoLabel;   //用户信息label
 
 @property(nonatomic, strong, readonly) UILabel *locationLabel;  //位置信息label
 @property(nonatomic, strong, readonly) UIImageView *picView;    //图片view

@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
 
-        self.userInfo = [dictionary objectForKey:@"userInfo"];
+        _userInfo = [dictionary objectForKey:@"userInfo"];
         self.iconUrl = [dictionary objectForKey:@"icon"];
         self.locationInfo = [dictionary objectForKey:@"location"];
 
